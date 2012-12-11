@@ -35,6 +35,10 @@ input {
 	padding:				10px
 }
 
+.pwdhash input {
+	width:					100%;
+}
+
 .pwdhash .button {
 	width:					100%;
 	height:					50px;
