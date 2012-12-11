@@ -5,15 +5,17 @@ PKG			:= PwdHashHD
 VERSION		:= 2.2.$(shell git log --pretty=format:'' | wc -l | sed 's/ *//')
 DEPLOY		:= deploy/pwdhash2
 
-# TODO	Make the "${DEPLOY}" task work by copying debug.html and the various
-#		directories without running minify. Another target called "release" can
-#		actually run minify, so "make clean all" will build debug and running
-#		"make clean release all" will build a release.
-
 clean:
 	rm -rf *.ipk deploy build 2>/dev/null || true
 
 ${DEPLOY}:
+	rm -rf deploy build
+	mkdir -p deploy/pwdhash2
+	cp -r assets enyo lib source package.js icon* deploy/pwdhash2/
+	cp debug.html deploy/pwdhash2/index.html
+
+release:
+	rm -rf deploy build
 	mkdir build
 	./tools/deploy.sh
 
@@ -41,5 +43,5 @@ log:
 test: launch log
 	@true
 
-.PHONY: clean webos install launch log test
+.PHONY: clean webos install launch log test release
 

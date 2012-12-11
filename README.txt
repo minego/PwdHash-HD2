@@ -1,5 +1,5 @@
-PwdHash-HD2
-===========
+PwdHash-HD 2
+================================================================================
 
 Enyo 2 based application for generating pwdhash.com compatible site specific
 passwords.
@@ -10,8 +10,34 @@ Twitter:	@_minego
 Email: 		pwdhash@minego.net
 Web:		http://minego.net
 
+
+
+Building
 ================================================================================
- PwdHash HD license:
+
+This application can simply be run in a browser, but may also be minified and
+packaged for webOS. Packaging for other platforms may be included in the future.
+
+Building requires gnu make. Minifying requires nodejs.
+
+Deploy as debug:
+	make clean all
+
+Deploy release (minified):
+	make clean release all
+
+Package for webOS:
+	make webos
+
+Install package on a webOS device:
+	make install
+
+Test on webOS device:
+	make test
+
+
+
+PwdHash HD license:
 ================================================================================
 
 You may do whatever you want with this source code with the following conditions:
