@@ -182,7 +182,8 @@ rendered: function()
 			enter their own.
 		*/
 		this.domains = [
-			"google.com", "amazon.com", "twitter.com", "facebook.com"
+			"google.com", "amazon.com", "twitter.com", "facebook.com",
+			"netflix.com", "youtube.com", "linkedin.com", "flickr.com"
 		];
 	}
 
