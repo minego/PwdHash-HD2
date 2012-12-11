@@ -5,10 +5,16 @@ PKG			:= PwdHashHD
 VERSION		:= 2.2.$(shell git log --pretty=format:'' | wc -l | sed 's/ *//')
 DEPLOY		:= deploy/pwdhash2
 
+# TODO	Make the "${DEPLOY}" task work by copying debug.html and the various
+#		directories without running minify. Another target called "release" can
+#		actually run minify, so "make clean all" will build debug and running
+#		"make clean release all" will build a release.
+
 clean:
 	rm -rf *.ipk deploy build 2>/dev/null || true
 
 ${DEPLOY}:
+	mkdir build
 	./tools/deploy.sh
 
 ${DEPLOY}/appinfo.json: ${DEPLOY}

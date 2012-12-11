@@ -142,6 +142,7 @@ finish = function(loader) {
 	var outfolder = path.dirname(output);
 	var exists = fs.existsSync || path.existsSync;
 	if (outfolder != "." && !exists(outfolder)) {
+console.log(outfolder);
 		fs.mkdirSync(outfolder);
 	}
 	// Unfortunately, less parsing is asynchronous, so concatCSS is now as well

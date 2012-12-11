@@ -11,5 +11,7 @@ enyo.depends(
 	"domain-extractor.js",
 	"hashed-password.js",
 
-	"clipboard.js"
+	"clipboard.js",
+
+	"webos-ext"
 );
