@@ -14,15 +14,13 @@
 	ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-// TODO	With the cool popup to search for recent domains it doesn't make much
-//		sense to have a pain on the left for tablets... So how do we fill the
-//		screen?
-//
-//		Perhaps just center it and call it good?
-
-// TODO	Package as a webOS app
-
 // TODO	Implement the dashboard for webOS phones and tablets
+// TODO	Implement an app menu with an about page?
+// TODO Why doesn't tap work on the recent domains menu?
+// TODO	Actually store recent domains...
+// TODO	The first character of the domain should not be uppercase...
+// TODO	Hide black bar on the pre3
+// TODO	Fix scaling on the pre3, everything is tiny
 
 enyo.kind({
 
@@ -138,11 +136,9 @@ rendered: function()
 		Only show the "copy password" button if we are able to successfully set
 		the clipboard on this platform.
 	*/
-	clipboard.test(function(works) {
-		if (!works) {
-			this.$.copybutton.destroy();
-		}
-	}.bind(this));
+	if (!clipboard.works()) {
+		this.$.copybutton.destroy();
+	}
 },
 
 reset: function(sender, event)
@@ -151,9 +147,11 @@ reset: function(sender, event)
 	this.$.password.setValue('');
 	this.$.generated.setValue('');
 
-	this.$.copybutton.setContent($L("Copy Password"));
-	this.$.copybutton.setDisabled(true);
 	this.$.resetbutton.setDisabled(true);
+	if (this.$.copybutton) {
+		this.$.copybutton.setContent($L("Copy Password"));
+		this.$.copybutton.setDisabled(true);
+	}
 },
 
 copyPassword: function(sender, event)
