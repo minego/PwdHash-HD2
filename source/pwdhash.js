@@ -24,7 +24,6 @@
 enyo.kind({
 
 name:											"net.minego.pwdhash.main",
-kind:											enyo.FittableRows,
 
 domains: [
 	"google.com", "amazon.com", "twitter.com", "foo.com", "bar.com", "minego.net"
@@ -34,95 +33,114 @@ published: {
 	value:										''
 },
 
-fit:											true,
-classes:										"pwdhash",
+kind:											enyo.FittableRows,
 
 components: [
 	{
-		kind:									onyx.Groupbox,
-		classes:								"inputgroup",
+		kind:									onyx.Toolbar,
 
 		components: [
 			{
-				kind:							"extras.AutoCompleteInputDecorator",
-				name:							"recentdomains",
-
-				oninput:						"filterdomains",
-				onfocus:						"recentdomains",
-				onValueSelected:				"selectdomain",
-				onkeydown:						"nextfieldonenter",
-				nextfield:						"password",
-
-				components: [{
-					name:						"domain",
-					kind:						onyx.Input,
-					selectOnFocus:				true,
-					type:						"url",
-					ontap:						"recentdomains",
-
-					placeholder:				$L("Domain or URL")
-				}]
+				kind:							enyo.Image,
+				src:							"assets/icon.png"
 			},
 			{
-				kind:							onyx.InputDecorator,
-				components: [{
-					name:						"password",
-					kind:						onyx.Input,
-					type:						"password",
-					selectOnFocus:				true,
-
-					placeholder:				$L("Master Password"),
-					oninput:					"generate",
-					onkeydown:					"nextfieldonenter",
-					nextfield:					"generated"
-				}]
+				content:						"PwdHash"
 			}
 		]
 	},
 	{
-		kind:									onyx.Groupbox,
-		classes:								"inputgroup",
+		kind:									enyo.FittableRows,
+		classes:								"pwdhash",
 		fit:									true,
-
 		components: [
 			{
-				kind:							onyx.InputDecorator,
-				components: [{
-					name:						"generated",
-					classes:					"generated",
-					kind:						onyx.Input,
-					selectOnFocus:				true,
+				kind:							onyx.Groupbox,
+				classes:						"inputgroup",
 
-					placeholder:				$L("Generated Password"),
-					oninput:					"generate"
-				}]
-			}
-		]
-	},
-	{
-		kind:									onyx.Groupbox,
-		classes:								"inputgroup",
+				components: [
+					{
+						kind:					"extras.AutoCompleteInputDecorator",
+						name:					"recentdomains",
 
-		components: [
-			{
-				name:							"copybutton",
-				classes:						"button onyx-dark",
+						oninput:				"filterdomains",
+						onfocus:				"recentdomains",
+						onValueSelected:		"selectdomain",
+						onkeydown:				"nextfieldonenter",
+						nextfield:				"password",
 
-				content:						$L("Copy Password"),
-				kind:							onyx.Button,
-				ontap:							"copypassword",
+						components: [{
+							name:				"domain",
+							kind:				onyx.Input,
+							selectOnFocus:		true,
+							type:				"url",
+							ontap:				"recentdomains",
 
-				disabled:						true
+							placeholder:		$L("Domain or URL")
+						}]
+					},
+					{
+						kind:					onyx.InputDecorator,
+						components: [{
+							name:				"password",
+							kind:				onyx.Input,
+							type:				"password",
+							selectOnFocus:		true,
+
+							placeholder:		$L("Master Password"),
+							oninput:			"generate",
+							onkeydown:			"nextfieldonenter",
+							nextfield:			"generated"
+						}]
+					}
+				]
 			},
 			{
-				name:							"resetbutton",
-				classes:						"button onyx-negative",
+				kind:							onyx.Groupbox,
+				classes:						"inputgroup",
+				fit:							true,
 
-				content:						$L("Reset"),
-				kind:							onyx.Button,
-				ontap:							"reset",
+				components: [
+					{
+						kind:					onyx.InputDecorator,
+						components: [{
+							name:				"generated",
+							classes:			"generated",
+							kind:				onyx.Input,
+							selectOnFocus:		true,
 
-				disabled:						true
+							placeholder:		$L("Generated Password"),
+							oninput:			"generate"
+						}]
+					}
+				]
+			},
+			{
+				kind:							onyx.Groupbox,
+				classes:						"inputgroup",
+
+				components: [
+					{
+						name:					"copybutton",
+						classes:				"button onyx-dark",
+
+						content:				$L("Copy Password"),
+						kind:					onyx.Button,
+						ontap:					"copypassword",
+
+						disabled:				true
+					},
+					{
+						name:					"resetbutton",
+						classes:				"button onyx-negative",
+
+						content:				$L("Reset"),
+						kind:					onyx.Button,
+						ontap:					"reset",
+
+						disabled:				true
+					}
+				]
 			}
 		]
 	}
