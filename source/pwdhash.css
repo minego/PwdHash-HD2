@@ -1,0 +1,28 @@
+.body {
+	width:					100%;
+	height:					100%;
+}
+
+@media screen and (min-width:500px) {
+	.pwdhash {
+		width:				500px;
+		margin-left:		auto;
+		margin-right:		auto;
+	}
+}
+
+@media screen and (max-width:500px) {
+	.pwdhash {
+		width:				100%;
+	}
+}
+
+.pwdhash .inputgroup {
+	max-width:				100%;
+	padding:				10px
+}
+
+.pwdhash .button {
+	width:					100%;
+}
+
