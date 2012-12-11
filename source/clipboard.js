@@ -100,13 +100,17 @@ clipboard = {
 
 	keyboard: {
 		suspend: function() {
-			if (window.PalmSystem) {
+			if (window.PalmSystem &&
+				window.PalmSystem.setManualKeyboardEnabled
+			) {
 				PalmSystem.setManualKeyboardEnabled(true);
 			}
 		},
 		resume: function() {
-			if (window.PalmSystem) {
-				PalmSystem.setManualKeyboardEnabled(true);
+			if (window.PalmSystem &&
+				window.PalmSystem.setManualKeyboardEnabled
+			) {
+				PalmSystem.setManualKeyboardEnabled(false);
 			}
 		}
 	}
