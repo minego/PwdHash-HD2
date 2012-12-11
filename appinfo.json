@@ -1,13 +1,12 @@
 {
 	"id":			"net.minego.pwdhash",
-	"version":		"2.0.0",
+	"version":		"autoversion",
 	"vendor":		"minego",
 	"type":			"web",
 	"main":			"index.html",
 	"title":		"PwdHash",
-	"icon":			"assets/icon.png",
-	"splashicon":	"assets/icon-86.png",
+	"icon":			"icon.png",
+	"splashicon":	"icon-256x256.png",
 	"uiRevision":	2,
-	"noWindow":		true
+	"noWindow":		false
 }
-
