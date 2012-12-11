@@ -16,7 +16,6 @@
 
 // TODO	Implement the dashboard for webOS phones and tablets
 // TODO	Implement an app menu with an about page?
-// TODO Why doesn't tap work on the recent domains menu?
 // TODO	Actually store recent domains...
 // TODO	The first character of the domain should not be uppercase...
 // TODO	Hide black bar on the pre3
@@ -88,13 +87,12 @@ components: [
 				kind:							onyx.InputDecorator,
 				components: [{
 					name:						"generated",
+					classes:					"generated",
 					kind:						onyx.Input,
 					selectOnFocus:				true,
 
 					placeholder:				$L("Generated Password"),
-					oninput:					"generate",
-
-					style:						"font-family: monospace; font-size: 20px;"
+					oninput:					"generate"
 				}]
 			}
 		]
@@ -110,7 +108,7 @@ components: [
 
 				content:						$L("Copy Password"),
 				kind:							onyx.Button,
-				ontap:							"copyPassword",
+				ontap:							"copypassword",
 
 				disabled:						true
 			},
@@ -154,7 +152,7 @@ reset: function(sender, event)
 	}
 },
 
-copyPassword: function(sender, event)
+copypassword: function(sender, event)
 {
 	if (window.PalmSystem) {
 		// TODO	Launch a dashboard that shows the password (in an easy to read
@@ -224,7 +222,7 @@ filterdomains: function(sender, event)
 	this.generate(sender, event);
 
 	try {
-		uri = this.$.domain.getValue();
+		uri = this.$.domain.getValue().toLowerCase();
 		domain = (new SPH_DomainExtractor()).extractDomain(uri);
 		domain = domain.toLowerCase();
 	} catch (e) {
@@ -254,15 +252,28 @@ selectdomain: function(sender, event)
 {
 	this.$.domain.setValue(event.value);
 	this.generate(sender, event);
+
+	if (this.$.password.hasNode()) {
+		this.$.password.hasNode().focus();
+	}
 },
 
 nextfieldonenter: function(sender, event)
 {
 	var		node;
 
-	if (event.keyCode !== 13) {
+	/* Act on enter or tab */
+	if (event.keyCode !== 13 && event.keyCode !== 9) {
 		return;
 	}
+
+	/*
+		If we don't prevent the default then tab cause the browser to freak out
+		and loop between inputs like crazy.
+	*/
+	event.preventDefault();
+
+	this.$.recentdomains.setValues([]);
 
 	if ((!(node = event.dispatchTarget) && !(node = sender)) || !node.hasNode) {
 		return;
@@ -273,6 +284,10 @@ nextfieldonenter: function(sender, event)
 	}
 
 	if (sender.nextfield) {
+		if (sender.nextfield === "generated") {
+			this.copypassword();
+		}
+
 		if (this.$[sender.nextfield].hasNode()) {
 			this.$[sender.nextfield].hasNode().focus();
 		}

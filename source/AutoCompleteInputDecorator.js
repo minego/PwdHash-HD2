@@ -25,8 +25,7 @@ enyo.kind({
     name: "extras.AutoCompleteInputDecorator",
     kind: "onyx.InputDecorator",
     handlers: {
-        onSelect: "itemSelected",
-		onblur: "inputBlurred"
+        onSelect: "itemSelected"
     },
     published: {
         values: "",
@@ -59,8 +58,5 @@ enyo.kind({
     },
     itemSelected: function(source, event) {
         this.doValueSelected({ value: event.content });
-    },
-    inputBlurred: function(source, event) {
-		this.waterfall("onRequestHideMenu", {activator: this});
-	}
+    }
 });
