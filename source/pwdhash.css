@@ -14,11 +14,19 @@ input {
 		margin-left:		auto;
 		margin-right:		auto;
 	}
+
+	.generated {
+		font-size:			2.4em !important;
+	}
 }
 
 @media screen and (max-width:500px) {
 	.pwdhash {
 		width:				100%;
+	}
+
+	.generated {
+		font-size:			1.6em !important;
 	}
 }
 
@@ -34,7 +42,6 @@ input {
 
 .generated {
 	font-family:			monospace;
-	font-size:				1.7em !important;
 }
 
 .onyx-input-decorator {
