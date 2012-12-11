@@ -14,11 +14,11 @@
 	ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-// TODO	Implement the dashboard for webOS phones and tablets
+// TODO	Implement the dashboard for webOS phones and tablets, or at least a
+//		notification?
+
 // TODO	Implement an app menu with an about page?
 // TODO	Actually store recent domains...
-// TODO	The first character of the domain should not be uppercase...
-// TODO	Hide black bar on the pre3
 // TODO	Fix scaling on the pre3, everything is tiny
 
 enyo.kind({
@@ -132,12 +132,16 @@ rendered: function()
 {
 	this.inherited(arguments);
 
+	this.$.domain.setAttribute('x-palm-disable-auto-cap', true);
+
 	/*
 		Only show the "copy password" button if we are able to successfully set
 		the clipboard on this platform.
 	*/
 	if (!clipboard.works()) {
 		this.$.copybutton.destroy();
+	} else {
+		this.$.generated.setDisabled(true);
 	}
 },
 
