@@ -21,5 +21,19 @@ all: ${DEPLOY}
 
 webos: deploy/${APPID}_${VERSION}_all.ipk
 
-.PHONY: clean webos
+install: webos
+	@palm-install *.ipk
+
+launch: install
+	@palm-launch -i ${APPID}
+
+log:
+	-palm-log -f ${APPID} | sed -u										\
+		-e 's/\[[0-9]*-[0-9]*:[0-9]*:[0-9]*\.[0-9]*\] [a-zA-Z]*: //'	\
+		-e 's/indicated new content, but not active./\n\n\n/'
+
+test: launch log
+	@true
+
+.PHONY: clean webos install launch log test
 
