@@ -29,6 +29,7 @@ input {
 
 .pwdhash .button {
 	width:					100%;
+	height:					50px;
 }
 
 .generated {

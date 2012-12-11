@@ -24,6 +24,7 @@
 enyo.kind({
 
 name:											"net.minego.pwdhash.main",
+kind:											enyo.FittableRows,
 
 domains: [
 	"google.com", "amazon.com", "twitter.com", "foo.com", "bar.com", "minego.net"
@@ -81,6 +82,7 @@ components: [
 	{
 		kind:									onyx.Groupbox,
 		classes:								"inputgroup",
+		fit:									true,
 
 		components: [
 			{
@@ -104,7 +106,7 @@ components: [
 		components: [
 			{
 				name:							"copybutton",
-				classes:						"button",
+				classes:						"button onyx-dark",
 
 				content:						$L("Copy Password"),
 				kind:							onyx.Button,
@@ -114,7 +116,7 @@ components: [
 			},
 			{
 				name:							"resetbutton",
-				classes:						"button",
+				classes:						"button onyx-negative",
 
 				content:						$L("Reset"),
 				kind:							onyx.Button,
