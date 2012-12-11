@@ -20,8 +20,6 @@
 // TODO	Implement an app menu with an about page?
 // TODO	Allow resetting the list of domains
 // TODO	Fix scaling on the pre3, everything is tiny
-// TODO	Allow launching the app with a URI so that a browser patch can be
-//		created.
 
 enyo.kind({
 
@@ -148,7 +146,7 @@ components: [
 	}
 ],
 
-rendered: function()
+create: function()
 {
 	var json = null;;
 
@@ -175,8 +173,6 @@ rendered: function()
 	}
 
 	if (!this.domains.length) {
-		// TODO	Improve the default list of recent domains
-
 		/*
 			The default list of recent domains. Domains will be added as users
 			enter their own.
@@ -187,6 +183,19 @@ rendered: function()
 		];
 	}
 
+	/* Was the app launched with a uri? */
+	try {
+		if (eny.webOS.launchParams &&
+			(json = enyo.webOS.launchParams()) &&
+			json.uri
+		) {
+			this.$.domain.setValue(json.uri);
+		}
+	} catch (e) { };
+},
+
+rendered: function()
+{
 	/* Prevent auto capitalization on webOS devices */
 	this.$.domain.setAttribute('x-palm-disable-auto-cap', true);
 
