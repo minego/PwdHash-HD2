@@ -18,16 +18,16 @@
 //		notification?
 
 // TODO	Implement an app menu with an about page?
-// TODO	Actually store recent domains...
+// TODO	Allow resetting the list of domains
 // TODO	Fix scaling on the pre3, everything is tiny
+// TODO	Allow launching the app with a URI so that a browser patch can be
+//		created.
 
 enyo.kind({
 
 name:											"net.minego.pwdhash.main",
 
-domains: [
-	"google.com", "amazon.com", "twitter.com", "foo.com", "bar.com", "minego.net"
-],
+domains: [],
 
 published: {
 	value:										''
@@ -65,6 +65,7 @@ components: [
 
 						oninput:				"filterdomains",
 						onfocus:				"recentdomains",
+
 						onValueSelected:		"selectdomain",
 						onkeydown:				"nextfieldonenter",
 						nextfield:				"password",
@@ -110,7 +111,8 @@ components: [
 							selectOnFocus:		true,
 
 							placeholder:		$L("Generated Password"),
-							oninput:			"generate"
+							oninput:			"generate",
+							onfocus:			"savedomain"
 						}]
 					}
 				]
@@ -148,8 +150,43 @@ components: [
 
 rendered: function()
 {
+	var json = null;;
+
 	this.inherited(arguments);
 
+	/* Load the recent domain list */
+	if (window.localStorage) {
+		json = window.localStorage.getItem("recentdomains");
+	}
+
+	if (!json) {
+		json = enyo.getCookie("recentdomains");
+	}
+
+	try {
+		if (json) {
+			this.domains = enyo.json.parse(json);
+			this.log(this.domains);
+		} else {
+			this.domains = [];
+		}
+	} catch(e) {
+		this.domains = [];
+	}
+
+	if (!this.domains.length) {
+		// TODO	Improve the default list of recent domains
+
+		/*
+			The default list of recent domains. Domains will be added as users
+			enter their own.
+		*/
+		this.domains = [
+			"google.com", "amazon.com", "twitter.com", "facebook.com"
+		];
+	}
+
+	/* Prevent auto capitalization on webOS devices */
 	this.$.domain.setAttribute('x-palm-disable-auto-cap', true);
 
 	/*
@@ -189,6 +226,8 @@ copypassword: function(sender, event)
 		this.$.copybutton.setContent($L("Password Copied"));
 		this.$.copybutton.setDisabled(true);
 	}
+
+	this.savedomain();
 },
 
 generate: function(sender, event)
@@ -316,6 +355,38 @@ nextfieldonenter: function(sender, event)
 			this.$[sender.nextfield].hasNode().focus();
 		}
 	}
+},
+
+savedomain: function(sender, event)
+{
+	var last;
+
+	domain = this.$.domain.getValue();
+
+	if (!domain || !domain.length) {
+		return;
+	}
+
+	/* Only store the domain, not a URI */
+	domain = (new SPH_DomainExtractor()).extractDomain(domain.toLowerCase());
+
+	if (-1 != enyo.indexOf(domain, this.domains)) {
+		/* Already there */
+		return;
+	}
+
+	this.domains.unshift(domain);
+	while (this.domains.length > 10) {
+		this.domains.pop();
+	}
+
+	/* Save the list */
+	if (window.localStorage) {
+		window.localStorage.setItem("recentdomains",
+			enyo.json.stringify(this.domains));
+	}
+
+	enyo.setCookie("recentdomains", enyo.json.stringify(this.domains));
 }
 
 
