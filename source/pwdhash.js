@@ -196,6 +196,8 @@ create: function()
 
 rendered: function()
 {
+	this.inherited(arguments);
+
 	/* Prevent auto capitalization on webOS devices */
 	this.$.domain.setAttribute('x-palm-disable-auto-cap', true);
 
@@ -208,6 +210,13 @@ rendered: function()
 	} else {
 		this.$.generated.setDisabled(true);
 	}
+
+	this.log('moo');
+	try {
+		/* Leave the keyboard showing all the time on the TouchPad */
+		enyo.webOS.keyboard.setManualMode(true);
+		enyo.webOS.keyboard.show();
+	} catch(e) {};
 },
 
 reset: function(sender, event)
@@ -238,6 +247,14 @@ copypassword: function(sender, event)
 	}
 
 	this.savedomain();
+
+	if (enyo.webOS.deactivate) {
+		/*
+			Switch to card view, so that the user can go paste the password
+			in another app.
+		*/
+		enyo.webOS.deactivate();
+	}
 },
 
 generate: function(sender, event)
