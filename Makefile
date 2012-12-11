@@ -11,7 +11,7 @@ clean:
 ${DEPLOY}:
 	rm -rf deploy build
 	mkdir -p deploy/pwdhash2
-	cp -r assets enyo lib source package.js icon* deploy/pwdhash2/
+	cp -r assets enyo lib source package.js icon* framework_config.json deploy/pwdhash2/
 	cp debug.html deploy/pwdhash2/index.html
 
 release:
