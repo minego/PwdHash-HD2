@@ -2,6 +2,7 @@ enyo.depends(
 	"$lib/layout",
 	"$lib/onyx",
 
+	"layout.js",
 	"pwdhash.js",
 	"pwdhash.css",
 

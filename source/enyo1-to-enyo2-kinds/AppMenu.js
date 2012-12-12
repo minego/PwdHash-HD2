@@ -14,6 +14,7 @@
    limitations under the License.
 */
 
+enyo.AppMenu = "enyo.AppMenu";
 enyo.kind({
 	name: "enyo.AppMenu",
 	kind: onyx.Menu,
@@ -39,11 +40,11 @@ enyo.kind({
 	//* @public
 	show: function() {
 		var height = 30 * this.controls.length - 1; /* take the scroller out of the equation */
-		
+
 		if (height > this.maxHeight) {
 			height = this.maxHeight;
 		}
-		
+
 		this.setBounds({
 			height: height
 		});

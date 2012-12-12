@@ -9,7 +9,9 @@ input {
 }
 
 @media screen and (min-width:500px) {
-	.pwdhash {
+	.pwdhash,
+	.help,
+	.about {
 		width:				500px;
 		margin-left:		auto;
 		margin-right:		auto;
@@ -21,8 +23,15 @@ input {
 }
 
 @media screen and (max-width:500px) {
-	.pwdhash {
+	.pwdhash,
+	.help,
+	.about {
 		width:				100%;
+	}
+
+	.help,
+	.about {
+		margin:				10px;
 	}
 
 	.generated {
@@ -51,3 +60,4 @@ input {
 .onyx-input-decorator {
 	background:				white;
 }
+
