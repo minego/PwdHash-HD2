@@ -13,5 +13,6 @@ enyo.depends(
 
 	"clipboard.js",
 
-	"webos-ext"
+	"webos-ext",
+	"enyo1-to-enyo2-kinds"
 );
