@@ -39,6 +39,7 @@ components: [
 	{
 		kind:									enyo.Panels,
 		name:									"panels",
+		classes:								"panels",
 		fit:									true,
 		arrangerKind:							"CardArranger",
 		style:									"width: 100%; height: 100%;",
@@ -98,7 +99,7 @@ components: [
 							{
 								kind:			onyx.Button,
 								content:		"Close",
-								ontap:			"back"
+								ontap:			"home"
 							}
 						]
 					},
@@ -137,14 +138,27 @@ components: [
 							{
 								kind:			onyx.Button,
 								content:		"Close",
-								ontap:			"back"
+								ontap:			"home"
 							}
 						]
 					},
 					{
-						name:					"help",
 						classes:				"help",
-						kind:					enyo.Scroller
+						kind:					enyo.Scroller,
+
+						components: [
+							{
+								name:			"help"
+							},
+							{
+								name:			"reset",
+								classes:		"button onyx-negative",
+
+								content:		$L("Reset recent domains"),
+								kind:			onyx.Button,
+								ontap:			"resetdomains"
+							}
+						]
 					}
 				]
 			}
@@ -152,23 +166,25 @@ components: [
 	}
 ],
 
-back: function(sender, event)
+home: function(sender, event)
 {
-	this.$.panels.setIndex(1);
+	this.$.panels.setIndex(0);
 },
 
 about: function(sender, event)
 {
-	this.$.panels.setIndex(2);
+	this.$.panels.setIndex(1);
 },
 
 help: function(sender, event)
 {
-	this.$.panels.setIndex(3);
+	this.$.reset.setDisabled(false);
+	this.$.panels.setIndex(2);
 },
 
 resetdomains: function(sender, event)
 {
+	this.$.reset.setDisabled(true);
 	this.$.main.setDomains([]);
 },
 

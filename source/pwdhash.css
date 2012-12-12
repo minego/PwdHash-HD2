@@ -23,7 +23,7 @@ input {
 }
 
 @media screen and (max-width:500px) {
-	.pwdhash p,
+	.pwdhash,
 	.help,
 	.about {
 		width:				100%;
@@ -49,7 +49,7 @@ input {
 	width:					100%;
 }
 
-.pwdhash .button {
+.panels .button {
 	width:					100%;
 	height:					50px;
 }

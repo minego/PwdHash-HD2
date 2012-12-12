@@ -25,8 +25,6 @@
 // TODO	Create a browser patch for webOS to launch the app with the URL from the
 //		browser.
 
-// TODO	Expose a way to reset the recent domain list for non-webOS devices
-
 enyo.kind({
 name:									"net.minego.pwdhash.form",
 
