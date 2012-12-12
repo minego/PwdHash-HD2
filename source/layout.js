@@ -81,6 +81,8 @@ components: [
 
 			/* About */
 			{
+				layoutKind:						"FittableRowsLayout",
+
 				components: [
 					{
 						kind:					onyx.Toolbar,
@@ -108,13 +110,16 @@ components: [
 						classes:				"about",
 						kind:					enyo.Scroller,
 
-						allowHtml:				true
+						allowHtml:				true,
+						fit:					true
 					}
 				]
 			},
 
 			/* Help */
 			{
+				layoutKind:						"FittableRowsLayout",
+
 				components: [
 					{
 						kind:					onyx.Toolbar,
@@ -145,6 +150,7 @@ components: [
 					{
 						classes:				"help",
 						kind:					enyo.Scroller,
+						fit:					true,
 
 						components: [
 							{
