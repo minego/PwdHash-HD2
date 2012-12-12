@@ -17,16 +17,23 @@
 // TODO	Implement the dashboard for webOS phones and tablets, or at least a
 //		notification?
 
-// TODO	Allow resetting the list of domains
 // TODO	Fix scaling on the pre3, everything is tiny
+
+// TODO	Port to android with phonegap, and implement an intent so that apps can
+//		share links with the app to fill out the domain.
+
+// TODO	Create a browser patch for webOS to launch the app with the URL from the
+//		browser.
+
+// TODO	Expose a way to reset the recent domain list for non-webOS devices
 
 enyo.kind({
 name:									"net.minego.pwdhash.form",
 
-domains: [],
 
 published: {
-	value:								''
+	value:								'',
+	domains:							[]
 },
 
 kind:									enyo.FittableRows,
@@ -386,6 +393,11 @@ savedomain: function(sender, event)
 		this.domains.pop();
 	}
 
+	this.domainsChanged();
+},
+
+domainsChanged: function()
+{
 	/* Save the list */
 	if (window.localStorage) {
 		window.localStorage.setItem("recentdomains",
@@ -394,6 +406,5 @@ savedomain: function(sender, event)
 
 	enyo.setCookie("recentdomains", enyo.json.stringify(this.domains));
 }
-
 
 });

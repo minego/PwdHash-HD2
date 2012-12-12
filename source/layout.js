@@ -23,6 +23,10 @@ components: [
 		kind:									"enyo.AppMenu",
 		components: [
 			{
+				content:						$L("Reset recent domains"),
+				ontap:							"resetdomains"
+			},
+			{
 				content:						$L("About"),
 				ontap:							"about"
 			},
@@ -67,6 +71,7 @@ components: [
 						]
 					},
 					{
+						name:					"main",
 						kind:					"net.minego.pwdhash.form",
 						classes:				"pwdhash"
 					}
@@ -160,6 +165,11 @@ about: function(sender, event)
 help: function(sender, event)
 {
 	this.$.panels.setIndex(2);
+},
+
+resetdomains: function(sender, event)
+{
+	this.$.main.setDomains([]);
 },
 
 create: function()
