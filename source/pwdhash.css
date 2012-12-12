@@ -23,15 +23,16 @@ input {
 }
 
 @media screen and (max-width:500px) {
-	.pwdhash,
+	.pwdhash p,
 	.help,
 	.about {
 		width:				100%;
 	}
 
-	.help,
-	.about {
-		margin:				10px;
+	.help p,
+	.about p {
+		padding-left:		10px;
+		padding-right:		10px;
 	}
 
 	.generated {

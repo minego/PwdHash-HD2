@@ -198,7 +198,7 @@ html: {
 		"	This app was developed by Micah N Gorrell. The source and license",
 		"	can be obtained at",
 		"	<a href=\"http://github.com/minego/PwdHash-HD2/\"",
-		"		>github.com/minego/PwdHash-HD2/</a>.",
+		"		>github.com/minego/PwdHash-HD2/</a>",
 		"</p>",
 		"",
 		"<p>",
