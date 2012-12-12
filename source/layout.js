@@ -55,7 +55,7 @@ components: [
 							{
 								kind:			enyo.Image,
 								src:			"assets/icon.png",
-								style:			"height: 48px;",
+								style:			"width: 48px; height: 48px;",
 								ontap:			"about"
 							},
 							{
@@ -89,7 +89,7 @@ components: [
 							{
 								kind:			enyo.Image,
 								src:			"assets/icon.png",
-								style:			"height: 48px;"
+								style:			"width: 48px; height: 48px;"
 							},
 							{
 								content:		"About",
@@ -123,7 +123,7 @@ components: [
 							{
 								kind:			enyo.Image,
 								src:			"assets/icon.png",
-								style:			"height: 48px;"
+								style:			"width: 48px; height: 48px;"
 							},
 							{
 								content:		"Help",
@@ -154,17 +154,17 @@ components: [
 
 back: function(sender, event)
 {
-	this.$.panels.setIndex(0);
+	this.$.panels.setIndex(1);
 },
 
 about: function(sender, event)
 {
-	this.$.panels.setIndex(1);
+	this.$.panels.setIndex(2);
 },
 
 help: function(sender, event)
 {
-	this.$.panels.setIndex(2);
+	this.$.panels.setIndex(3);
 },
 
 resetdomains: function(sender, event)
