@@ -17,8 +17,6 @@
 // TODO	Implement the dashboard for webOS phones and tablets, or at least a
 //		notification?
 
-// TODO	Fix scaling on the pre3, everything is tiny
-
 // TODO	Port to android with phonegap, and implement an intent so that apps can
 //		share links with the app to fill out the domain.
 
@@ -132,7 +130,32 @@ components: [
 
 create: function()
 {
-	var json = null;;
+	var json = null;
+
+	try {
+		var classes	= document.body.className;
+		var info	= enyo.webOS.deviceInfo();
+		var name	= null;
+
+		if ("Emulator" != info.modelNameAscii) {
+			name = info.modelNameAscii;
+		} else {
+			/* Detect sizes known to be supported by the webOS emulator */
+			if (info.screenWidth == 480 && info.screenHeight == 800) {
+				name = "Pre3";
+			} else if (info.screenWidth == 320 && info.screenHeight == 480) {
+				name = "Pre";
+			} else if (info.screenWidth == 320 && info.screenHeight == 400) {
+				name = "Veer";
+			}
+		}
+
+		if (name) {
+			document.body.className = [ name, classes ].join(' ');
+			// this.log('Adding class to body: ' + name);
+		}
+
+	} catch (e) {};
 
 	this.inherited(arguments);
 
@@ -195,7 +218,6 @@ rendered: function()
 		this.$.generated.setDisabled(true);
 	}
 
-	this.log('moo');
 	try {
 		/* Leave the keyboard showing all the time on the TouchPad */
 		enyo.webOS.keyboard.setManualMode(true);

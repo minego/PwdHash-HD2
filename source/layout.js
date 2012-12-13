@@ -47,6 +47,8 @@ components: [
 		components: [
 			/* The main app */
 			{
+				layoutKind:						"FittableRowsLayout",
+
 				components: [
 					{
 						kind:					onyx.Toolbar,
@@ -74,7 +76,8 @@ components: [
 					{
 						name:					"main",
 						kind:					"net.minego.pwdhash.form",
-						classes:				"pwdhash"
+						classes:				"pwdhash",
+						fit:					true
 					}
 				]
 			},
