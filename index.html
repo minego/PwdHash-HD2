@@ -18,6 +18,53 @@
 	</head>
 	<body class="enyo-unselectable onyx">
 		<script>
+			if (window.navigator && window.navigator.mozApps) {
+				var request = window.navigator.mozApps.getInstalled();
+
+				request.onsuccess = function () {
+					var found	= false;
+					var i		= 0;
+
+					if (request.result && request.result.length) {
+						for (i = 0; i < request.result.length; i++) {
+							if (request.result[i] && request.result[i].manifest &&
+								request.result[i].manifest.name === "PwdHash"
+							) {
+								found = true;
+								break;
+							}
+						}
+					}
+
+					if (!found) {
+						this.installUrl = (
+							location.href.substring(0, location.href.lastIndexOf("/")) + "/manifest.webapp"
+						);
+
+						this.doIt = function() {
+							try {
+								var req2 = navigator.mozApps.install(this.installUrl);
+
+								req2.onsuccess = function(data) {
+									window.close();
+								};
+								req2.onerror = function(error) {
+								};
+							} catch (error) {
+								this.error = error;
+							}
+						};
+
+						this.doIt();
+					} else {
+					}
+				}.bind(this);
+
+				request.onerror = function (error) {
+					this.error = error;
+				}.bind(this);
+			}
+
 			try {
 				new net.minego.pwdhash.layout().renderInto(document.body);
 			} catch (e) {
