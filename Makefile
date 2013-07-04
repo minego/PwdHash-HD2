@@ -18,6 +18,7 @@ release:
 	rm -rf deploy build
 	mkdir build
 	./tools/deploy.sh
+	cp app.html manifest.webapp deploy/pwdhash2/
 
 ${DEPLOY}/appinfo.json: ${DEPLOY}
 	cat appinfo.json | sed -e s/autoversion/$(VERSION)/ > ${DEPLOY}/appinfo.json

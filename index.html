@@ -46,9 +46,10 @@
 								var req2 = navigator.mozApps.install(this.installUrl);
 
 								req2.onsuccess = function(data) {
-									window.close();
+									document.body.innerHTML = 'Application successfully installed';
 								};
 								req2.onerror = function(error) {
+									document.body.innerHTML = 'Application could not be installed: ' + error;
 								};
 							} catch (error) {
 								this.error = error;
@@ -57,18 +58,19 @@
 
 						this.doIt();
 					} else {
+						document.body.innerHTML = 'Application is already installed';
 					}
 				}.bind(this);
 
 				request.onerror = function (error) {
-					this.error = error;
+					document.body.innerHTML = 'Could not determine if application is installed';
 				}.bind(this);
-			}
-
-			try {
-				new net.minego.pwdhash.layout().renderInto(document.body);
-			} catch (e) {
-				location = 'debug.html';
+			} else {
+				try {
+					new net.minego.pwdhash.layout().renderInto(document.body);
+				} catch (e) {
+					location = 'debug.html';
+				}
 			}
 		</script>
 	</body>
