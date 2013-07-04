@@ -1,0 +1,16 @@
+{
+	"name":				"PwdHash",
+	"description":		"Easily create site specific passwords",
+	"launch_path":		"/",
+	"icons": {
+		"64":			"/assets/icon.png",
+		"86":			"/assets/icon-86.png",
+		"128":			"/assets/icon-128.png"
+	},
+
+	"developer": {
+		"name":			"Micah N Gorrell",
+		"url":			"http://minego.net"
+	},
+	"default_locale":	"en"
+}

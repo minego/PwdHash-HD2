@@ -11,7 +11,7 @@ clean:
 ${DEPLOY}:
 	rm -rf deploy build
 	mkdir -p deploy/pwdhash2
-	cp -r assets enyo lib source package.js icon* framework_config.json deploy/pwdhash2/
+	cp -r assets enyo lib source package.js icon* framework_config.json manifest.webapp deploy/pwdhash2/
 	cp debug.html deploy/pwdhash2/index.html
 
 release:
@@ -28,6 +28,9 @@ deploy/${APPID}_${VERSION}_all.ipk: ${DEPLOY}/appinfo.json
 all: ${DEPLOY}
 
 webos: deploy/${APPID}_${VERSION}_all.ipk
+
+openwebos: webos
+	@scp -r deploy/pwdhash2 root@192.168.7.2:/usr/palm/applications/${APPID}
 
 install: webos
 	@palm-install *.ipk
