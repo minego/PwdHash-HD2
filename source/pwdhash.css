@@ -20,6 +20,11 @@ input {
 	.generated {
 		font-size:			2.4em !important;
 	}
+
+	.pwdhash .inputgroup {
+		max-width:			100%;
+		padding:			10px
+	}
 }
 
 @media screen and (max-width:500px) {
@@ -36,13 +41,17 @@ input {
 	}
 
 	.generated {
-		font-size:			1.6em !important;
+		font-size:			1.5em !important;
 	}
-}
 
-.pwdhash .inputgroup {
-	max-width:				100%;
-	padding:				10px
+	#layout_toolbar {
+		padding:			2px;
+	}
+
+	.pwdhash .inputgroup {
+		max-width:			100%;
+		padding:			5px
+	}
 }
 
 .pwdhash input {
