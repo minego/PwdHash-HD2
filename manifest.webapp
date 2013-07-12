@@ -1,7 +1,7 @@
 {
 	"name":				"PwdHash",
 	"description":		"Easily create site specific passwords",
-	"launch_path":		"/app.html",
+	"launch_path":		"/index.html",
 	"icons": {
 		"64":			"/assets/icon.png",
 		"86":			"/assets/icon-86.png",

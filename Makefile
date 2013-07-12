@@ -11,14 +11,14 @@ clean:
 ${DEPLOY}:
 	rm -rf deploy build
 	mkdir -p deploy/pwdhash2
-	cp -r assets enyo lib source package.js icon* framework_config.json manifest.webapp deploy/pwdhash2/
-	cp debug.html deploy/pwdhash2/index.html
+	cp -r assets enyo lib source package.js icon* deploy/pwdhash2/
+	cp icon* framework_config.json manifest.* index.html deploy/pwdhash2/
 
 release:
 	rm -rf deploy build
 	mkdir build
 	./tools/deploy.sh
-	cp app.html manifest.webapp deploy/pwdhash2/
+	cp icon* framework_config.json manifest.* index.html deploy/pwdhash2/
 
 ${DEPLOY}/appinfo.json: ${DEPLOY}
 	cat appinfo.json | sed -e s/autoversion/$(VERSION)/ > ${DEPLOY}/appinfo.json

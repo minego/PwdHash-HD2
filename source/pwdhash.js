@@ -23,6 +23,8 @@
 // TODO	Create a browser patch for webOS to launch the app with the URL from the
 //		browser.
 
+// TODO	Copy and paste on Firefox OS once that is possible
+
 enyo.kind({
 name:									"net.minego.pwdhash.form",
 
@@ -199,6 +201,65 @@ create: function()
 			this.$.domain.setValue(json.uri);
 		}
 	} catch (e) { };
+
+
+	// if (enyo.platform.firefoxOS) {
+	if (-1 != navigator.userAgent.toLowerCase().indexOf("firefox") &&
+		-1 != navigator.userAgent.toLowerCase().indexOf("mobile;")
+	) {
+		this.install();
+	}
+},
+
+install: function()
+{
+	var request = window.navigator.mozApps.getInstalled();
+
+	request.onsuccess = function () {
+		var found	= false;
+		var i		= 0;
+
+		if (request.result && request.result.length) {
+			for (i = 0; i < request.result.length; i++) {
+				if (request.result[i] && request.result[i].manifest &&
+					request.result[i].manifest.name === "PwdHash"
+				) {
+					found = true;
+					break;
+				}
+			}
+		}
+
+		if (!found) {
+			this.installUrl = (
+				location.href.substring(0, location.href.lastIndexOf("/")) + "/manifest.webapp"
+			);
+
+			this.doIt = function() {
+				try {
+					var req2 = navigator.mozApps.install(this.installUrl);
+
+					req2.onsuccess = function(data) {
+						// Show something?
+					};
+					req2.onerror = function(error) {
+						// Show something?
+					};
+				} catch (error) {
+					this.error = error;
+					// Show something?
+				}
+			};
+
+			this.doIt();
+		} else {
+			// Show something?
+		}
+	}.bind(this);
+
+	request.onerror = function (error) {
+		/* Oh well, just run in the browser */
+	}.bind(this);
 },
 
 rendered: function()
@@ -428,3 +489,10 @@ domainsChanged: function()
 }
 
 });
+
+window.addEventListener('load', function()
+{
+	new net.minego.pwdhash.layout().renderInto(document.body);
+}, false);
+
+
