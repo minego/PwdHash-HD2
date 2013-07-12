@@ -19,6 +19,7 @@ release:
 	mkdir build
 	./tools/deploy.sh
 	cp icon* framework_config.json manifest.* index.html deploy/pwdhash2/
+	rm -rf build
 
 ${DEPLOY}/appinfo.json: ${DEPLOY}
 	cat appinfo.json | sed -e s/autoversion/$(VERSION)/ > ${DEPLOY}/appinfo.json
