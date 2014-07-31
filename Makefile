@@ -18,6 +18,7 @@ release:
 	rm -rf deploy build
 	mkdir build
 	./tools/deploy.sh
+	mv deploy/pwdhash deploy/pwdhash2
 	cp icon* framework_config.json manifest.* index.html deploy/pwdhash2/
 	rm -rf build
 
