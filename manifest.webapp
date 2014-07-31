@@ -1,6 +1,6 @@
 {
 	"name":				"PwdHash",
-	"version":			"1.01",
+	"version":			"2.3",
 
 	"description":		"Easily create site specific passwords",
 	"launch_path":		"/index.html",

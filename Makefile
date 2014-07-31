@@ -2,7 +2,7 @@ APP			:= pwdhash
 VENDOR		:= net.minego
 APPID		:= $(VENDOR).$(APP)
 PKG			:= PwdHashHD
-VERSION		:= 2.2.$(shell git log --pretty=format:'' | wc -l | sed 's/ *//')
+VERSION		:= 2.3.$(shell git log --pretty=format:'' | wc -l | sed 's/ *//')
 DEPLOY		:= deploy/pwdhash2
 
 clean:

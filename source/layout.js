@@ -215,6 +215,10 @@ create: function()
 html: {
 	about: [
 		"<p>",
+		"	Version: 2.3",
+		"</p>",
+		"",
+		"<p>",
 		"	This app is provided \"as is\" with no warranties expressed or",
 		"	implied.  Use at your own risk.",
 		"</p>",
