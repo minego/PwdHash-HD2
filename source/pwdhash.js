@@ -59,7 +59,7 @@ components: [
 					kind:				onyx.Input,
 					selectOnFocus:		true,
 					type:				"url",
-					ontap:				"recentdomains",
+					onfocus:			"recentdomains",
 
 					placeholder:		$L("Domain or URL")
 				}]
@@ -192,7 +192,7 @@ create: function()
 		];
 	}
 
-	/* Was the app launched with a uri? */
+	/* Was the app launched with a uri? (webOS style) */
 	try {
 		if (eny.webOS.launchParams &&
 			(json = enyo.webOS.launchParams()) &&
@@ -201,6 +201,21 @@ create: function()
 			this.$.domain.setValue(json.uri);
 		}
 	} catch (e) { };
+
+	/* Was the app launched with a uri? (firefox style) */
+	try {
+		navigator.mozSetMessageHandler('activity', function(activity) {
+			switch (activity.source.name) {
+				case 'view':
+				case 'share':
+					if (activity.source.data.url) {
+						this.$.domain.setValue(activity.source.data.url);
+					}
+					break;
+			}
+		}.bind(this));
+	} catch (e) {
+	}
 
 
 	// if (enyo.platform.firefoxOS) {
@@ -368,6 +383,7 @@ recentdomains: function(sender, event)
 	}
 
 	this.$.recentdomains.setValues(domains);
+	this.$.domain.focus();
 },
 
 filterdomains: function(sender, event)
